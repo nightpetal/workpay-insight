@@ -2,7 +2,6 @@ from flask import Flask, render_template, request
 import pandas as pd
 import joblib, os
 from google import genai
-import key
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
 GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")

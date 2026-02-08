@@ -9,6 +9,19 @@
       href="{{ url_for('static', filename='style.css') }}"
     />
   </head>
+  <header>
+    <div class="header-container">
+      <h1>WorkPay Insight</h1>
+      <nav>
+        <a
+          href="https://github.com/nightpetal/workpay-insight"
+          target="_blank"
+          rel="noopener"
+          >GitHub & Docs</a
+        >
+      </nav>
+    </div>
+  </header>
 
   <body>
     <div class="page">
@@ -95,7 +108,7 @@
                 {% for msg in chat_history %} {% if msg.sender == 'User' %}
                 <p><strong>You:</strong> {{ msg.message }}</p>
                 {% else %}
-                <p><strong>Bot:</strong> {{ msg.message }}</p>
+                <p><strong>Assistant:</strong> {{ msg.message }}</p>
                 {% endif %} {% endfor %}
               </div>
 
@@ -118,4 +131,46 @@
       </div>
     </div>
   </body>
+  <footer>
+    <div>
+      <section>
+        <strong>Arpan Gajmer</strong>
+        <a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://linkedin.com/in/" target="_blank" rel="noopener"
+          >LinkedIn</a
+        >
+      </section>
+
+      <section>
+        <strong>Sagun Khatiwada</strong>
+        <a
+          href="https://github.com/Sagunkhatiwada-bot"
+          target="_blank"
+          rel="noopener"
+          >GitHub</a
+        >
+        <a
+          href="https://www.linkedin.com/in/sagun-khatiwada-042473314/"
+          target="_blank"
+          rel="noopener"
+          >LinkedIn</a
+        >
+      </section>
+
+      <section>
+        <strong>U.B.</strong>
+        <a href="https://github.com/nightpetal" target="_blank" rel="noopener"
+          >GitHub</a
+        >
+        <a
+          href="https://linkedin.com/in/nightpetal"
+          target="_blank"
+          rel="noopener"
+          >LinkedIn</a
+        >
+      </section>
+    </div>
+
+    <small>© 2026 Your Project Name. All rights reserved.</small>
+  </footer>
 </html>
