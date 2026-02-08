@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Freelancer Earnings Predictor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='style.css') }}"
+    />
+  </head>
+
+  <body>
+    <div class="page">
+      <div class="layout">
+        <div class="card left">
+          <h2>Freelancer Earnings Prediction</h2>
+          <!-- doesnt break on responsive design mode -->
+          <!-- <form method="POST" action="/"> -->
+          <form method="POST" action="{{ url_for('index') }}">
+            <input type="hidden" name="form_type" value="prediction" />
+            <label>Experience Level</label>
+            <select name="experience">
+              <option value="0">Beginner</option>
+              <option value="1">Intermediate</option>
+              <option value="2">Expert</option>
+            </select>
+
+            <label>Project Type</label>
+            <select name="project_type">
+              <option value="0">Hourly</option>
+              <option value="1">Fixed</option>
+            </select>
+
+            <label>Job Category</label>
+            <select name="job_category">
+              <option>Web Development</option>
+              <option>App Development</option>
+              <option>Digital Marketing</option>
+              <option>SEO</option>
+              <option>Graphic Design</option>
+              <option>Data Entry</option>
+              <option>Customer Support</option>
+            </select>
+
+            <label>Platform</label>
+            <select name="platform">
+              <option>Fiverr</option>
+              <option>Upwork</option>
+              <option>Freelancer</option>
+              <option>PeoplePerHour</option>
+              <option>Toptal</option>
+            </select>
+
+            <label>Client Region</label>
+            <select name="client_region">
+              <option>Asia</option>
+              <option>Europe</option>
+              <option>Middle East</option>
+              <option>Canada</option>
+              <option>Australia</option>
+              <option>USA</option>
+            </select>
+
+            <label>Hours Worked Per Week</label>
+            <input type="number" name="hours" step="0.5" required min="0" />
+
+            <button type="submit">Predict</button>
+          </form>
+        </div>
+
+        <div class="right">
+          {% if predictions %}
+          <div class="card results">
+            <h3>Predictions</h3>
+            <p>
+              <strong>Hourly Rate:</strong> {{ predictions["Hourly_Rate"] |
+              default('') }}
+            </p>
+            <p>
+              <strong>Job Success Rate:</strong> {{
+              predictions["Job_Success_Rate"] | default('') }}
+            </p>
+            <p>
+              <strong>Client Rating:</strong> {{ predictions["Client_Rating"] |
+              default('') }}
+            </p>
+          </div>
+          {% endif %}
+
+          <div class="card">
+            <h3>Ask the Assistant</h3>
+            <div class="chatbox">
+              <div class="chat-messages">
+                {% for msg in chat_history %} {% if msg.sender == 'User' %}
+                <p><strong>You:</strong> {{ msg.message }}</p>
+                {% else %}
+                <p><strong>Bot:</strong> {{ msg.message }}</p>
+                {% endif %} {% endfor %}
+              </div>
+
+              <form
+                method="POST"
+                action="{{ url_for('index') }}"
+                class="chat-input"
+              >
+                <input type="hidden" name="form_type" value="chat" />
+                <input
+                  type="text"
+                  name="chat_input"
+                  placeholder="Type a message..."
+                />
+                <button type="submit">Send</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
