@@ -5,7 +5,7 @@ from google import genai
 import key
 
 app = Flask(__name__, template_folder="../templates", static_folder="../static")
-
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, "model", "model.pkl")
 
@@ -44,7 +44,7 @@ def index():
                 target: round(models[target].predict(df)[0], 2) for target in models
             }
             try:
-                client = genai.Client(api_key=key.API_KEY)
+                client = genai.Client(api_key=GEMINI_API_KEY)
                 response = client.models.generate_content(
                     model="gemini-3-flash-preview",
                     contents=f"{instructions} What does the user need to improve their salary based on this: {input_data}",
@@ -65,7 +65,7 @@ def index():
                 chat_history.append({"sender": "User", "message": user_msg})
 
                 try:
-                    client = genai.Client(api_key=key.API_KEY)
+                    client = genai.Client(api_key=GEMINI_API_KEY)
                     response = client.models.generate_content(
                         model="gemini-3-flash-preview",
                         contents=f"{instructions}old history{chat_history}request{user_msg}",
